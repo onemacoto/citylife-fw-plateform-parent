@@ -9,7 +9,6 @@
 		<!--<relativePath />--> <!-- lookup parent from repository -->
 	</parent>
 	<artifactId>citylife-fw-function-core</artifactId>
-	<version>${citylife-fw-function-core.version}</version>
 	<packaging>jar</packaging>
 	<name>${project.artifactId}</name>
 	<description>${project.artifactId} for ${project.groupId}</description>
