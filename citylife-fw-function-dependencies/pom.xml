@@ -16,7 +16,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>com.citylife</groupId>
-				<artifactId>citylife-fw-function-core</artifactId>
+				<artifactId>citylife-fw-starter-function</artifactId>
 				<version>${project.version}</version>
 				<type>jar</type>
 			</dependency>

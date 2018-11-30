@@ -63,5 +63,6 @@
 		<module>citylife-fw-starter-plateform</module>
 		<module>citylife-fw-function-dependencies</module>
         <module>citylife-fw-function-core</module>
+        <module>citylife-fw-starter-function</module>
 	</modules>
 </project>
