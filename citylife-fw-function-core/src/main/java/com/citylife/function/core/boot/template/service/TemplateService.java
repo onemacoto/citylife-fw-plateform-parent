@@ -1,23 +1,21 @@
 package com.citylife.function.core.boot.template.service;
 
-import java.util.Map;
-
-
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.citylife.function.core.boot.template.action.ITemplateAciton;
+import com.citylife.function.core.boot.template.action.IAciton;
 import com.citylife.function.core.boot.template.bean.FunctionResult;
 import com.citylife.function.core.boot.template.context.TemplateActionContext;
 
-public class AbstractTemplateService {
-  
+public class TemplateService {
+
   @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Throwable.class)
-  public <C extends TemplateActionContext> FunctionResult<?> excute(ITemplateAciton<C> action, Map<String, ?> parameter) {
+  public <T, C extends TemplateActionContext<T>> FunctionResult<?> excute(IAciton<T, C> action, T parameter) {
     return excuteWithoutTransaction(action, parameter);
   }
 
-  public <C extends TemplateActionContext> FunctionResult<?> excuteWithoutTransaction(ITemplateAciton<C> action, Map<String, ?> parameter) {
+  public <T, C extends TemplateActionContext<T>> FunctionResult<?> excuteWithoutTransaction(
+      IAciton<T, C> action, T parameter) {
     String actionName = action.getActionName();
     try {
       C context = action.createContext(parameter);
@@ -27,7 +25,7 @@ public class AbstractTemplateService {
       }
       return action.execute(context);
     } finally {
-      
+
     }
   }
 

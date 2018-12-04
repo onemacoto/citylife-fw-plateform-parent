@@ -6,9 +6,19 @@ public class FunctionResult<T> implements FunctionResultCode {
 
   private T value;
 
-  public FunctionResult(String rtnCode) {
+  public FunctionResult(String rtnCode, T value) {
     this.rtnCode = rtnCode;
+    this.value = value;
   }
+  
+  public FunctionResult(String rtnCode) {
+    this(rtnCode, null);
+  }
+
+  public FunctionResult(T value) {
+    this(SUCCESS, value);
+  }
+  
 
   public String getRtnCode() {
     return rtnCode;

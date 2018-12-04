@@ -1,20 +1,16 @@
 package com.citylife.function.core.boot.template.context;
 
-import java.util.Map;
+import com.citylife.function.core.utils.ExceptionUtils;
 
-public class TemplateActionContextFactory<C extends TemplateActionContext> {
-  Class<C> theClass = null;
+public class TemplateActionContextFactory<T> {
 
-  public TemplateActionContextFactory(Class<C> theClass) {
-    this.theClass = theClass;
-  }
-
-  public C createInstance(Map<String, ?> parameter) {
+  public <R extends IActionContext<T>> R createInstance(T parameter, Class<R> cls) {
     try {
-      C instance = this.theClass.newInstance();
+      R instance = cls.newInstance();
       instance.setParameter(parameter);
       return instance;
     } catch (Exception e) {
+      ExceptionUtils.wrapAndThrow(e);
     }
     return null;
   }

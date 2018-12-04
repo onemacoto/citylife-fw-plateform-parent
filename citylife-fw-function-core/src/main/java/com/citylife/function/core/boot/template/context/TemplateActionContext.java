@@ -1,19 +1,15 @@
 package com.citylife.function.core.boot.template.context;
 
-import java.util.Map;
+public class TemplateActionContext<T> implements IActionContext<T> {
 
-public class TemplateActionContext {
-  
-  private Map<String, ?> parameter;
+  private T parameter;
 
-  public Map<String, ?> getParameter() {
+  public T getParameter() {
     return parameter;
   }
 
-  public void setParameter(Map<String, ?> parameter) {
+  public void setParameter(T parameter) {
     this.parameter = parameter;
   }
-  
-  
 
 }
