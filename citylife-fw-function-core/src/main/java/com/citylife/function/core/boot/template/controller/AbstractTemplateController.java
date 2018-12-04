@@ -6,7 +6,7 @@ import org.springframework.validation.BindingResult;
 import com.citylife.function.core.annotations.ActionTransactional;
 import com.citylife.function.core.boot.template.action.IAciton;
 import com.citylife.function.core.boot.template.bean.FunctionResult;
-import com.citylife.function.core.boot.template.context.TemplateActionContext;
+import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.service.TemplateService;
 import com.citylife.function.core.utils.AnnotationUtils;
 
@@ -19,8 +19,8 @@ public class AbstractTemplateController<S extends TemplateService> {
     this.service = service;
   }
 
-  protected <T, C extends TemplateActionContext<T>> FunctionResult<?> doAction(IAciton<T, C> action,
-      T parameter, BindingResult bindingResult) {
+  protected <T, C extends IActionContext<T>> FunctionResult<?> doAction(IAciton<T, C> action, T parameter,
+      BindingResult bindingResult) {
 
     FunctionResult<?> result = null;
     if (bindingResult.hasErrors()) {
