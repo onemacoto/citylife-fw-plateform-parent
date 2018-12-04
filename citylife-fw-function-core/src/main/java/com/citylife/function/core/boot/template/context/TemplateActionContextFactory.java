@@ -1,6 +1,6 @@
 package com.citylife.function.core.boot.template.context;
 
-import com.citylife.function.core.utils.ExceptionUtils;
+import com.citylife.common.utils.ExceptionUtils;
 
 public class TemplateActionContextFactory<T> {
 

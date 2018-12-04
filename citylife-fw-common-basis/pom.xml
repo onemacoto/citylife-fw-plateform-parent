@@ -8,11 +8,16 @@
   <artifactId>citylife-fw-common-basis</artifactId>
   <name>${project.artifactId}</name>
   <description>${project.artifactId} for ${project.groupId}</description>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
       <optional>true</optional>
     </dependency>
   </dependencies>

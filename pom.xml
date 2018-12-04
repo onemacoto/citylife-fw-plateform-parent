@@ -38,6 +38,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>com.citylife</groupId>
+        <artifactId>citylife-fw-common-basis</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <repositories>

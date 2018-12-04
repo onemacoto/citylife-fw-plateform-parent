@@ -5,10 +5,11 @@ import java.lang.reflect.Type;
 
 import org.springframework.util.ClassUtils;
 
+import com.citylife.common.exception.MethodNotSupportedException;
+import com.citylife.common.utils.ExceptionUtils;
 import com.citylife.function.core.boot.template.bean.FunctionResult;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContextFactory;
-import com.citylife.function.core.exception.MethodNotSupportedException;
 
 public abstract class AbstractTemplateAction<P, C extends IActionContext<P>> implements IAciton<P, C> {
 
@@ -27,6 +28,7 @@ public abstract class AbstractTemplateAction<P, C extends IActionContext<P>> imp
       }
       return (Class<M>) genericType;
     } catch (Exception e) {
+      ExceptionUtils.wrapAndThrow(e);
     }
     return null;
   }

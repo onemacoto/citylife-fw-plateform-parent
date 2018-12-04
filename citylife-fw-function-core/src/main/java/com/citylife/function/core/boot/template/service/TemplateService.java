@@ -16,17 +16,12 @@ public class TemplateService {
 
   public <T, C extends IActionContext<T>> FunctionResult<?> excuteWithoutTransaction(
       IAciton<T, C> action, T parameter) {
-    String actionName = action.getActionName();
-    try {
       C context = action.createContext(parameter);
       FunctionResult<?> result = action.validate(context);
       if (result.hasError()) {
         return result;
       }
       return action.execute(context);
-    } finally {
-
-    }
   }
 
 }

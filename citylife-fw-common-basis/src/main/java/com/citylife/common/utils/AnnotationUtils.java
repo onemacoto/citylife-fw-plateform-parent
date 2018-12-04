@@ -1,4 +1,4 @@
-package com.citylife.function.core.utils;
+package com.citylife.common.utils;
 
 import java.lang.annotation.Annotation;
 

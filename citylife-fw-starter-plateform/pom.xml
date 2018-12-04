@@ -14,11 +14,6 @@
     <dependencies>
       <dependency>
         <groupId>com.citylife</groupId>
-        <artifactId>citylife-fw-common-basis</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.citylife</groupId>
         <artifactId>citylife-fw-function-dependencies</artifactId>
         <version>${project.version}</version>
         <type>pom</type>
@@ -26,10 +21,5 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>com.citylife</groupId>
-      <artifactId>citylife-fw-common-basis</artifactId>
-    </dependency>
-  </dependencies>
+
 </project>

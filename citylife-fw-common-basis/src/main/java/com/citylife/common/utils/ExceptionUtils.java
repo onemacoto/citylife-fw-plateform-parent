@@ -1,7 +1,7 @@
-package com.citylife.function.core.utils;
+package com.citylife.common.utils;
 
-import com.citylife.function.core.exception.MethodNotSupportedException;
-import com.citylife.function.core.exception.SystemRuntimeException;
+import com.citylife.common.exception.MethodNotSupportedException;
+import com.citylife.common.exception.SystemRuntimeException;
 
 public class ExceptionUtils {
 

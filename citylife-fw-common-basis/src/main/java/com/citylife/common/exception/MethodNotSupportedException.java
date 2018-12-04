@@ -1,4 +1,4 @@
-package com.citylife.function.core.exception;
+package com.citylife.common.exception;
 
 public class MethodNotSupportedException extends RuntimeException {
 

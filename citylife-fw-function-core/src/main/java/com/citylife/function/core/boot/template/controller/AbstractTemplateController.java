@@ -3,12 +3,12 @@ package com.citylife.function.core.boot.template.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 
+import com.citylife.common.utils.AnnotationUtils;
 import com.citylife.function.core.annotations.ActionTransactional;
 import com.citylife.function.core.boot.template.action.IAciton;
 import com.citylife.function.core.boot.template.bean.FunctionResult;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.service.TemplateService;
-import com.citylife.function.core.utils.AnnotationUtils;
 
 public class AbstractTemplateController<S extends TemplateService> {
 
