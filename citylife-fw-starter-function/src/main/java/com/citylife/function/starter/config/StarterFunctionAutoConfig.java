@@ -21,7 +21,7 @@ public class StarterFunctionAutoConfig {
 
   @Bean
   @ConditionalOnMissingBean
-  @ConditionalOnProperty(prefix = "citylife.service", value = "enabled", havingValue = "true")
+  @ConditionalOnProperty(prefix = "citylife.function", value = "enabled", matchIfMissing = true)
   public FilterRegistrationBean<MDCInsertingServletFilter> mdcInsertingServletFilter() {
     FilterRegistrationBean<MDCInsertingServletFilter> registration = new FilterRegistrationBean<>(
         new MDCInsertingServletFilter());

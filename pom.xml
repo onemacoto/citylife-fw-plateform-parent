@@ -72,5 +72,7 @@
     <module>citylife-fw-function-dependencies</module>
     <module>citylife-fw-function-core</module>
     <module>citylife-fw-starter-function</module>
+    <module>citylife-fw-log</module>
+    <module>citylife-fw-common-basis</module>
   </modules>
 </project>
