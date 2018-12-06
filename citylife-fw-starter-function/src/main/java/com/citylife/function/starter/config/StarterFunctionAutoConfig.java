@@ -8,12 +8,15 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.citylife.function.core.log.IOperationLogger;
+import com.citylife.function.core.log.OperationLoggerImpl;
 import com.citylife.function.starter.properties.StarterFunctionProperties;
 
 import ch.qos.logback.classic.helpers.MDCInsertingServletFilter;
 
 @Configuration
 @EnableConfigurationProperties(StarterFunctionProperties.class)
+@ConditionalOnProperty(prefix = "citylife.function", value = "enabled", matchIfMissing = true)
 public class StarterFunctionAutoConfig {
 
   @Autowired
@@ -21,7 +24,7 @@ public class StarterFunctionAutoConfig {
 
   @Bean
   @ConditionalOnMissingBean
-  @ConditionalOnProperty(prefix = "citylife.function", value = "enabled", matchIfMissing = true)
+  @ConditionalOnProperty(prefix = "citylife.function", value = "mdcFilterEnabled", havingValue = "true")
   public FilterRegistrationBean<MDCInsertingServletFilter> mdcInsertingServletFilter() {
     FilterRegistrationBean<MDCInsertingServletFilter> registration = new FilterRegistrationBean<>(
         new MDCInsertingServletFilter());
@@ -29,5 +32,12 @@ public class StarterFunctionAutoConfig {
     registration.setName("mdcInsertingServletFilter");
     return registration;
   }
-
+  
+  @Bean
+  @ConditionalOnMissingBean
+  @ConditionalOnProperty(prefix = "citylife.function", value = "operationLogeerEnabled", matchIfMissing = true)
+  public IOperationLogger operationLogger() {
+    IOperationLogger bean = new OperationLoggerImpl();
+    return bean;
+  }
 }

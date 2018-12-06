@@ -11,7 +11,7 @@ import com.citylife.function.core.boot.template.bean.FunctionResult;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContextFactory;
 
-public abstract class AbstractTemplateAction<P, C extends IActionContext<P>> implements IAciton<P, C> {
+public abstract class AbstractTemplateAction<P, C extends IActionContext<P>> implements ITemplateAciton<P, C> {
 
   protected Class<C> getContextClass() {
     return getGenericClass(1);
