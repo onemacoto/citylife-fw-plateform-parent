@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.citylife</groupId>
@@ -8,6 +10,11 @@
   <artifactId>citylife-fw-common-basis</artifactId>
   <name>${project.artifactId}</name>
   <description>${project.artifactId} for ${project.groupId}</description>
+
+  <properties>
+    <logstash-logback-encoder.version>5.2</logstash-logback-encoder.version>
+    <fastjson.version>1.2.54</fastjson.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -19,6 +26,16 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>${logstash-logback-encoder.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
     </dependency>
   </dependencies>
 </project>
