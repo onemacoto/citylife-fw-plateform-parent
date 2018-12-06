@@ -1,0 +1,55 @@
+spring: 
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    enabled: false
+    sender:
+      type: web
+    base-url: http://172.40.2.127:9411
+server:
+  tomcat:
+    # Minimum number of worker threads.
+    min-spare-threads: 100
+    # Maximum number of worker threads.
+    max-threads: 1024
+    max-connections: 10000
+    accept-count: 100
+eureka:
+  client:
+    serviceUrl: 
+      #defaultZone: http://172.40.2.115:8761/eureka,http://172.40.2.116:8761/eureka
+      defaultZone: http://127.0.0.1:1001/eureka
+    registry-fetch-interval-seconds: 30 #拉取服务注册信息时间，默认60s
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
+    statusPageUrlPath: /hystrix
+    #Eureka客户端向服务端发送心跳的时间间隔，单位为秒
+    lease-renewal-interval-in-seconds: 30
+    #Eureka服务端在收到最后一次心跳之后等待的过期时间上限，单位为秒。
+    #超过该时间没有收到心跳，则服务端会将该服务实例从服务清单中剔除，从而禁止服务调用请求被发送到该实例上
+    lease-expiration-duration-in-seconds: 90
+    prefer-ip-address: true
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: false
+management: 
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+citylife:
+  function: 
+    mdc-filter-enabled: true
+    
+    
