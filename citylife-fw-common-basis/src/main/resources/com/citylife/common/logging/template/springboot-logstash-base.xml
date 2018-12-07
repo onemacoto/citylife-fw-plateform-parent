@@ -1,38 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-    <springProperty scope="context" name="LOG_DIR" source="citylife.logging.dir" defaultValue="/opt/citylife/logs"/>
-    <springProperty scope="context" name="applicationName" source="spring.application.name" defaultValue="undefined_applicationName" />
-    <springProperty scope="context" name="applicationIp" source="spring.cloud.client.ip-address" defaultValue="undefined_applicationIp" />
-    <property name="LOG_CITYLIFE_NAME" value="${applicationName}-citylife.log" />
-    <property name="LOG_SPRING_NAME" value="${applicationName}-spring.log" />
+  <springProfile name="windows">
+    <property name="LOG_DIR" value="c:/opt/citylife/logs" />
+  </springProfile>
 
-    <include resource="com/citylife/common/logging/template/citylife-logstash-appender.xml" />
-    <include resource="com/citylife/common/logging/template/spring-logstash-appender.xml" />
-    <include resource="com/citylife/common/logging/template/console-appender.xml" />
+  <springProfile name="!windows">
+    <property name="LOG_DIR" value="/opt/citylife/logs" />
+  </springProfile>
 
-    <logger name="operation" additivity="false" level="INFO">
-      <appender-ref ref="FILE_CITYLIFE" />
-      <appender-ref ref="CONSOLE" />
-    </logger>
+  <springProperty scope="context" name="applicationName"
+    source="spring.application.name"
+    defaultValue="undefined_applicationName" />
+  <springProperty scope="context" name="applicationIp"
+    source="spring.cloud.client.ip-address"
+    defaultValue="undefined_applicationIp" />
+  <property name="LOG_CITYLIFE_NAME"
+    value="${applicationName}-citylife.log" />
+  <property name="LOG_SPRING_NAME"
+    value="${applicationName}-spring.log" />
 
-    <logger name="admin" additivity="false" level="INFO">
-      <appender-ref ref="FILE_CITYLIFE" />
-      <appender-ref ref="CONSOLE" />
-    </logger>
+  <include
+    resource="com/citylife/common/logging/template/citylife-logstash-appender.xml" />
+  <include
+    resource="com/citylife/common/logging/template/spring-logstash-appender.xml" />
+  <include
+    resource="com/citylife/common/logging/template/console-appender.xml" />
 
-    <logger name="login" additivity="false" level="INFO">
-      <appender-ref ref="FILE_CITYLIFE" />
-      <appender-ref ref="CONSOLE" />
-    </logger>
+  <logger name="operation" additivity="false" level="INFO">
+    <appender-ref ref="FILE_CITYLIFE" />
+    <appender-ref ref="CONSOLE" />
+  </logger>
 
+  <logger name="admin" additivity="false" level="INFO">
+    <appender-ref ref="FILE_CITYLIFE" />
+    <appender-ref ref="CONSOLE" />
+  </logger>
+
+  <logger name="login" additivity="false" level="INFO">
+    <appender-ref ref="FILE_CITYLIFE" />
+    <appender-ref ref="CONSOLE" />
+  </logger>
+
+  <springProfile name="!prod">
     <logger name="debug" additivity="false" level="TRACE">
       <appender-ref ref="FILE_CITYLIFE" />
       <appender-ref ref="CONSOLE" />
     </logger>
+  </springProfile>
 
-    <root level="INFO">
-      <appender-ref ref="FILE_SPRING" />
-      <appender-ref ref="CONSOLE" />
-    </root>
+  <root level="INFO">
+    <appender-ref ref="FILE_SPRING" />
+    <appender-ref ref="CONSOLE" />
+  </root>
 </included>

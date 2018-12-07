@@ -2,11 +2,11 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
-  zipkin:
-    enabled: false
-    sender:
-      type: web
-    base-url: http://172.40.2.127:9411
+#  zipkin:
+#   enabled: 
+#    sender:
+#      type: web
+#   base-url: http://172.40.2.127:9411
 server:
   tomcat:
     # Minimum number of worker threads.
@@ -17,9 +17,9 @@ server:
     accept-count: 100
 eureka:
   client:
-    serviceUrl: 
+    #serviceUrl: 
       #defaultZone: http://172.40.2.115:8761/eureka,http://172.40.2.116:8761/eureka
-      defaultZone: http://127.0.0.1:1001/eureka
+      #defaultZone: http://127.0.0.1:1001/eureka
     registry-fetch-interval-seconds: 30 #拉取服务注册信息时间，默认60s
   instance:
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
@@ -37,8 +37,6 @@ feign:
     enabled: false
   okhttp:
     enabled: true
-  hystrix:
-    enabled: false
 management: 
   endpoints:
     enabled-by-default: true
@@ -48,8 +46,8 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-citylife:
-  function: 
-    mdc-filter-enabled: true
-    
-    
+#citylife:
+#  function: 
+#    mdc-filter-enabled: true
+logging:
+    config: classpath:citylife-logback.xml
