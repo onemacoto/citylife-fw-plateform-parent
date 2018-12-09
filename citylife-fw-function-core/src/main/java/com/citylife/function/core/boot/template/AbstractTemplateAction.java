@@ -1,4 +1,4 @@
-package com.citylife.function.core.boot.template.action;
+package com.citylife.function.core.boot.template;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -6,8 +6,9 @@ import java.lang.reflect.Type;
 import org.springframework.util.ClassUtils;
 
 import com.citylife.common.exception.MethodNotSupportedException;
+import com.citylife.common.model.IUser;
 import com.citylife.common.utils.ExceptionUtils;
-import com.citylife.function.core.boot.template.bean.FunctionResult;
+import com.citylife.function.core.boot.template.bean.ResponseData;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContextFactory;
 
@@ -40,12 +41,12 @@ public abstract class AbstractTemplateAction<P, C extends IActionContext<P>> imp
   }
 
   @Override
-  public C createContext(P parameter) {
-    return new TemplateActionContextFactory<P>().createInstance(parameter, getContextClass());
+  public C createContext(final P parameter, final IUser uvo) {
+    return new TemplateActionContextFactory<P>().createInstance(parameter, uvo, getContextClass());
   }
 
   @Override
-  public FunctionResult<?> execute(C context) {
+  public ResponseData<?> execute(C context) {
     throw new MethodNotSupportedException("the method exucete is not supported");
   }
 

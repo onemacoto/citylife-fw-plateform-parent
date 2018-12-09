@@ -1,13 +1,15 @@
 package com.citylife.function.core.boot.template.context;
 
+import com.citylife.common.model.IUser;
 import com.citylife.common.utils.ExceptionUtils;
 
 public class TemplateActionContextFactory<T> {
 
-  public <R extends IActionContext<T>> R createInstance(T parameter, Class<R> cls) {
+  public <R extends IActionContext<T>> R createInstance(T parameter, IUser uvo,  Class<R> cls) {
     try {
       R instance = cls.newInstance();
       instance.setParameter(parameter);
+      instance.setUser(uvo);
       return instance;
     } catch (Exception e) {
       ExceptionUtils.wrapAndThrow(e);

@@ -1,7 +1,7 @@
 package com.citylife.function.core.log;
 
 import com.citylife.common.logging.OperationLogger;
-import com.citylife.function.core.boot.template.action.IAction;
+import com.citylife.function.core.boot.template.IAction;
 
 public class OperationLoggerImpl implements IOperationLogger {
   
