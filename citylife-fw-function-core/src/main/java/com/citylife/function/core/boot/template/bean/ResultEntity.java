@@ -1,6 +1,10 @@
 package com.citylife.function.core.boot.template.bean;
 
-public class ResultEntity<T> implements FunctionResultCode {
+import java.io.Serializable;
+
+public class ResultEntity<T> implements FunctionResultCode, Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   private String rtnCode = SUCCESS;
 

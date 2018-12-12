@@ -3,7 +3,6 @@ package com.citylife.function.core.boot.template;
 import org.springframework.util.ClassUtils;
 
 import com.citylife.common.exception.MethodNotSupportedException;
-import com.citylife.common.model.IUser;
 import com.citylife.function.core.boot.template.bean.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContext;
@@ -19,8 +18,8 @@ public abstract class AbstractTemplateAction<P, R> implements ITemplateAciton<P,
 
 
   @Override
-  public IActionContext<P> createContext(final P parameter, final IUser uvo) {
-    return new TemplateActionContextFactory<P>().createInstance(parameter, uvo, getContextClass());
+  public IActionContext<P> createContext(final P parameter, final String token) {
+    return new TemplateActionContextFactory<P>().createInstance(parameter, token, getContextClass());
   }
   
   @Override

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.citylife.function.core.annotations.Dev;
+import com.citylife.function.core.config.FunctionFeignConfig;
 import com.citylife.function.core.config.FunctionWebMvcConfig;
 import com.citylife.function.core.log.IOperationLogger;
 import com.citylife.function.core.log.OperationLoggerImpl;
@@ -23,7 +24,7 @@ import ch.qos.logback.classic.helpers.MDCInsertingServletFilter;
 
 @Configuration
 @EnableConfigurationProperties(FunctionProperties.class)
-@Import(FunctionWebMvcConfig.class)
+@Import({FunctionWebMvcConfig.class, FunctionFeignConfig.class})
 public class StarterFunctionAutoConfig {
 
   @Autowired

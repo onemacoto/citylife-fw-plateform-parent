@@ -1,12 +1,11 @@
 package com.citylife.function.core.boot.template;
 
-import com.citylife.common.model.IUser;
 import com.citylife.function.core.boot.template.bean.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
 
 public interface ITemplateAciton<P, R> extends IAction {
 
-  IActionContext<P> createContext(P parameter, IUser uvo);
+  IActionContext<P> createContext(P parameter, String token);
 
   default ResultEntity<R> validate(IActionContext<P> context) {
     return ResultEntity.ok();

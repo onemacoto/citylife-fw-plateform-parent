@@ -7,6 +7,9 @@ public class TemplateActionContext<T> implements IActionContext<T> {
   private T parameter;
   
   private IUser uvo;
+  
+  private String token;
+
 
   public T getParameter() {
     return parameter;
@@ -25,5 +28,14 @@ public class TemplateActionContext<T> implements IActionContext<T> {
   public void setUser(IUser uvo) {
     this.uvo = uvo;
   }
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
+
 
 }

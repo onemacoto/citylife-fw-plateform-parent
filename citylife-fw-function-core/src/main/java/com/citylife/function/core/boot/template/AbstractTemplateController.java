@@ -2,13 +2,9 @@ package com.citylife.function.core.boot.template;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
-import org.springframework.util.StringUtils;
 
 import com.citylife.common.logging.AdminLogger;
-import com.citylife.common.model.IUser;
-import com.citylife.common.model.UserValueObject;
 import com.citylife.common.utils.AnnotationUtils;
-import com.citylife.common.utils.JWTUtils;
 import com.citylife.function.core.annotations.ActionTransactional;
 import com.citylife.function.core.boot.template.bean.ResultEntity;
 import com.citylife.function.core.log.IOperationLogger;
@@ -36,11 +32,10 @@ public class AbstractTemplateController<S extends TemplateService> {
     try {
       sw.start();
       ResultEntity<R> result = null;
-      IUser uvo = StringUtils.hasText(token) ? JWTUtils.parseToken(token, UserValueObject.class) : UserValueObject.empty();
       if (AnnotationUtils.isAnnotated(action, ActionTransactional.class)) {
-        result = service.excute(action, parameter, uvo);
+        result = service.excute(action, parameter, token);
       } else {
-        result = service.excuteWithoutTransaction(action, parameter, uvo);
+        result = service.excuteWithoutTransaction(action, parameter, token);
       }
       return result;
     } catch (Throwable t) {

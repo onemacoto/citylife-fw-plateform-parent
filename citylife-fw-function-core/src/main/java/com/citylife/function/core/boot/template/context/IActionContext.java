@@ -7,4 +7,6 @@ public interface IActionContext<T> {
   void setParameter(T parameter);
   IUser getUser();
   void setUser(IUser uvo);
+  String getToken();
+  void setToken(String token);
 }

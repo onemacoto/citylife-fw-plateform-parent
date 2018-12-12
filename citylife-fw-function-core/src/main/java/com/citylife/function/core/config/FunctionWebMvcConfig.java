@@ -13,35 +13,42 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.alibaba.fastjson.support.springfox.SwaggerJsonSerializer;
 import com.citylife.function.core.method.support.UserArgumentResolver;
+
+import springfox.documentation.spring.web.json.Json;
 
 @Configuration
 public class FunctionWebMvcConfig implements WebMvcConfigurer {
-  
-    @Autowired
-    private UserArgumentResolver userArgumentResolver;
-    
-	
-    /**
-     * 利用fastjson替换掉jackson，且解决中文乱码问题
-     * @param converters
-     */
-    @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        //处理中文乱码问题
-        List<MediaType> fastMediaTypes = new ArrayList<>();
-        fastMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-        fastConverter.setSupportedMediaTypes(fastMediaTypes);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        converters.add(fastConverter);
-    }
-    
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-      resolvers.add(userArgumentResolver);
-    }
+
+  @Autowired
+  private UserArgumentResolver userArgumentResolver;
+
+  /**
+   * 利用fastjson替换掉jackson，且解决中文乱码问题
+   * 
+   * @param converters
+   */
+  @Override
+  public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
+
+    List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
+    MediaType mediaTypeJson = MediaType.valueOf(MediaType.APPLICATION_JSON_UTF8_VALUE);
+    supportedMediaTypes.add(mediaTypeJson);
+    converter.setSupportedMediaTypes(supportedMediaTypes);
+
+    FastJsonConfig config = new FastJsonConfig();
+    config.getSerializeConfig().put(Json.class, new SwaggerJsonSerializer());
+    config.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
+    converter.setFastJsonConfig(config);
+    converters.add(converter);
+
+  }
+
+  @Override
+  public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+    resolvers.add(userArgumentResolver);
+  }
 
 }
