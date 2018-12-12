@@ -13,6 +13,7 @@ public class UserValueObject implements IUser, Serializable {
     return userId;
   }
 
+  @Override
   public void setUserId(String userId) {
     this.userId = userId;
   }

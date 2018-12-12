@@ -1,53 +1,36 @@
 package com.citylife.function.core.boot.template;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-
 import org.springframework.util.ClassUtils;
 
 import com.citylife.common.exception.MethodNotSupportedException;
 import com.citylife.common.model.IUser;
-import com.citylife.common.utils.ExceptionUtils;
-import com.citylife.function.core.boot.template.bean.ResponseData;
+import com.citylife.function.core.boot.template.bean.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
+import com.citylife.function.core.boot.template.context.TemplateActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContextFactory;
 
-public abstract class AbstractTemplateAction<P, C extends IActionContext<P>> implements ITemplateAciton<P, C> {
-
-  protected Class<C> getContextClass() {
-    return getGenericClass(1);
-  }
-
-  @SuppressWarnings("unchecked")
-  protected <M> Class<M> getGenericClass(int index) {
-    try {
-
-      Type genericType = ((ParameterizedType) ClassUtils.getUserClass(this).getGenericSuperclass())
-          .getActualTypeArguments()[index];
-      if (genericType instanceof ParameterizedType) {
-        return (Class<M>) ((ParameterizedType) genericType).getRawType();
-      }
-      return (Class<M>) genericType;
-    } catch (Exception e) {
-      ExceptionUtils.wrapAndThrow(e);
-    }
-    return null;
-  }
-
+public abstract class AbstractTemplateAction<P, R> implements ITemplateAciton<P, R> {
+  
   @Override
   public String getActionName() {
     Class<?> clazz = ClassUtils.getUserClass(this.getClass());
     return ClassUtils.getShortName(clazz);
   }
 
-  @Override
-  public C createContext(final P parameter, final IUser uvo) {
-    return new TemplateActionContextFactory<P>().createInstance(parameter, uvo, getContextClass());
-  }
 
   @Override
-  public ResponseData<?> execute(C context) {
+  public IActionContext<P> createContext(final P parameter, final IUser uvo) {
+    return new TemplateActionContextFactory<P>().createInstance(parameter, uvo, getContextClass());
+  }
+  
+  @Override
+  public ResultEntity<R> execute(IActionContext<P> context) {
     throw new MethodNotSupportedException("the method exucete is not supported");
+  }
+  
+  @SuppressWarnings("unchecked")
+  public Class<IActionContext<P>> getContextClass() {
+    return (Class<IActionContext<P>>) TemplateActionContext.class.asSubclass(IActionContext.class);
   }
 
 }

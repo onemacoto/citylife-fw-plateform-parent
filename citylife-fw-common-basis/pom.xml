@@ -14,8 +14,9 @@
   <properties>
     <logstash-logback-encoder.version>5.2</logstash-logback-encoder.version>
     <fastjson.version>1.2.54</fastjson.version>
+    <jwt.version>0.9.1</jwt.version>
+    <dozer-core.version>6.4.1</dozer-core.version>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -36,6 +37,26 @@
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>${fastjson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>${jwt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+    <groupId>com.github.dozermapper</groupId>
+    <artifactId>dozer-core</artifactId>
+      <version>${dozer-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

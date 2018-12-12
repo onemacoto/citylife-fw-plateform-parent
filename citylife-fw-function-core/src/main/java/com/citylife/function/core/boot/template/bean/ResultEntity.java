@@ -1,21 +1,21 @@
 package com.citylife.function.core.boot.template.bean;
 
-public class ResponseData<T> implements FunctionResultCode {
+public class ResultEntity<T> implements FunctionResultCode {
 
   private String rtnCode = SUCCESS;
 
   private T value;
 
-  public ResponseData(String rtnCode, T value) {
+  public ResultEntity(String rtnCode, T value) {
     this.rtnCode = rtnCode;
     this.value = value;
   }
   
-  public ResponseData(String rtnCode) {
+  public ResultEntity(String rtnCode) {
     this(rtnCode, null);
   }
 
-  public ResponseData(T value) {
+  public ResultEntity(T value) {
     this(SUCCESS, value);
   }
   
@@ -36,16 +36,16 @@ public class ResponseData<T> implements FunctionResultCode {
     this.value = value;
   }
 
-  public static ResponseData<?> failure(String errorCode) {
-    return new ResponseData<>(errorCode);
+  public static <R> ResultEntity<R> failure(String errorCode) {
+    return new ResultEntity<>(errorCode);
   }
 
-  public static ResponseData<?> ok() {
-    return new ResponseData<>(SUCCESS);
+  public static <R> ResultEntity<R> ok() {
+    return new ResultEntity<>(SUCCESS);
   }
   
-  public static <R> ResponseData<R> ok(R value) {
-    ResponseData<R> response =new ResponseData<>(SUCCESS);
+  public static <R> ResultEntity<R> ok(R value) {
+    ResultEntity<R> response =new ResultEntity<>(SUCCESS);
     response.setValue(value);
     return response;
   }
