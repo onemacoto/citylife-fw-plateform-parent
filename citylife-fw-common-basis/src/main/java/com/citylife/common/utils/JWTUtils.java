@@ -9,19 +9,15 @@ import javax.crypto.spec.SecretKeySpec;
 import com.citylife.common.model.IUser;
 
 import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JWTUtils {
 
   private final static Key secretKey;
-  
-  private final static JwtParser parser;
-  
+
   static {
     secretKey = serializeKey("secret");
-    parser = Jwts.parser().setSigningKey(secretKey);
   }
 
   public static String createToken(IUser user) {
@@ -33,7 +29,7 @@ public class JWTUtils {
 
   public static <T extends IUser> IUser parseToken(String token, Class<T> clazz) {
     
-    Map<String, Object> claims = parser.parseClaimsJws(token).getBody();
+    Map<String, Object> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     return BeanMapper.asBean(claims, clazz);
   }
   

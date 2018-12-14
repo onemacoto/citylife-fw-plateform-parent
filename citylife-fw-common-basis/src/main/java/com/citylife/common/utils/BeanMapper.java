@@ -6,8 +6,12 @@ import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 
 public class BeanMapper {
-  private static final Mapper dozer = DozerBeanMapperBuilder.buildDefault();
-  
+  private static final Mapper dozer;
+
+  static {
+    dozer = DozerBeanMapperBuilder.buildDefault();  
+  }
+
   public static <T> T map(Object source, Class<T> destinationClass) {
     return source == null ? null : dozer.map(source, destinationClass);
   }

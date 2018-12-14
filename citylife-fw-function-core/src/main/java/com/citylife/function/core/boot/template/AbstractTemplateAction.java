@@ -1,5 +1,6 @@
 package com.citylife.function.core.boot.template;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
 
 import com.citylife.common.exception.MethodNotSupportedException;
@@ -7,9 +8,17 @@ import com.citylife.function.core.boot.template.bean.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContextFactory;
+import com.github.dozermapper.core.Mapper;
 
 public abstract class AbstractTemplateAction<P, R> implements ITemplateAciton<P, R> {
   
+  @Autowired
+  private Mapper beanMapper;
+
+  protected Mapper getBeanMapper() {
+    return beanMapper;
+  }
+
   @Override
   public String getActionName() {
     Class<?> clazz = ClassUtils.getUserClass(this.getClass());
