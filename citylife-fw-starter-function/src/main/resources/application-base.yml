@@ -37,6 +37,9 @@ feign:
     enabled: false
   okhttp:
     enabled: true
+ribbon:
+  ReadTimeout: 90000 #超时时间
+  ConnectTimeout: 3000 #超时时间  
 management: 
   endpoints:
     enabled-by-default: true
