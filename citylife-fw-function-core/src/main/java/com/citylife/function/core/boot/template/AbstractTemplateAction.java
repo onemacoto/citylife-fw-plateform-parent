@@ -11,34 +11,40 @@ import com.citylife.function.core.boot.template.context.TemplateActionContextFac
 import com.github.dozermapper.core.Mapper;
 
 public abstract class AbstractTemplateAction<P, R> implements ITemplateAciton<P, R> {
-  
-  @Autowired
-  private Mapper beanMapper;
 
-  protected Mapper getBeanMapper() {
-    return beanMapper;
-  }
+	@Autowired
+	private Mapper dozerMapper;
 
-  @Override
-  public String getActionName() {
-    Class<?> clazz = ClassUtils.getUserClass(this.getClass());
-    return ClassUtils.getShortName(clazz);
-  }
+	@Autowired
+	private TemplateActionContextFactory<P> actionContextFactory;
 
+	protected Mapper getDozerMapper() {
+		return dozerMapper;
+	}
 
-  @Override
-  public IActionContext<P> createContext(final P parameter, final String token) {
-    return new TemplateActionContextFactory<P>().createInstance(parameter, token, getContextClass());
-  }
-  
-  @Override
-  public ResultEntity<R> execute(IActionContext<P> context) {
-    throw new MethodNotSupportedException("the method exucete is not supported");
-  }
-  
-  @SuppressWarnings("unchecked")
-  public Class<IActionContext<P>> getContextClass() {
-    return (Class<IActionContext<P>>) TemplateActionContext.class.asSubclass(IActionContext.class);
-  }
+	protected TemplateActionContextFactory<P> getActionContextFactory() {
+		return actionContextFactory;
+	}
+
+	@Override
+	public String getActionName() {
+		Class<?> clazz = ClassUtils.getUserClass(this.getClass());
+		return ClassUtils.getShortName(clazz);
+	}
+
+	@Override
+	public IActionContext<P> createContext(final P parameter, final String token) {
+		return getActionContextFactory().createInstance(parameter, token, getContextClass());
+	}
+
+	@Override
+	public ResultEntity<R> execute(IActionContext<P> context) {
+		throw new MethodNotSupportedException("the method exucete is not supported");
+	}
+
+	@SuppressWarnings("unchecked")
+	public Class<IActionContext<P>> getContextClass() {
+		return (Class<IActionContext<P>>) TemplateActionContext.class.asSubclass(IActionContext.class);
+	}
 
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.citylife.function.core.config.DozerBeanMapperConfig;
+import com.citylife.function.core.config.TemplateConfig;
 import com.citylife.function.core.config.FunctionFeignConfig;
 import com.citylife.function.core.config.FunctionWebMvcConfig;
 import com.citylife.function.core.log.IOperationLogger;
@@ -20,7 +20,7 @@ import ch.qos.logback.classic.helpers.MDCInsertingServletFilter;
 
 @Configuration
 @EnableConfigurationProperties(FunctionProperties.class)
-@Import({FunctionWebMvcConfig.class, FunctionFeignConfig.class, DozerBeanMapperConfig.class})
+@Import({FunctionWebMvcConfig.class, FunctionFeignConfig.class, TemplateConfig.class})
 public class StarterFunctionAutoConfig {
 
   @Autowired
