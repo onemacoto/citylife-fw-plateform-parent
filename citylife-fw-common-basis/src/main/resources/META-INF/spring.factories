@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.citylife.function.starter.config.StarterFunctionAutoConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.citylife.common.config.StarterCommonBasisAutoConfig
