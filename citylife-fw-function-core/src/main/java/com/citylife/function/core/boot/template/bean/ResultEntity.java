@@ -55,7 +55,7 @@ public class ResultEntity<T> implements FunctionResultCode, Serializable {
   }
   
   public boolean hasError() {
-    return rtnCode != SUCCESS;
+    return ! rtnCode.equals(SUCCESS);
   }
 
 }
