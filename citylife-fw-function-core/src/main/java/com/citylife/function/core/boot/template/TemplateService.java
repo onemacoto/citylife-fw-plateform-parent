@@ -3,7 +3,7 @@ package com.citylife.function.core.boot.template;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.citylife.function.core.boot.template.bean.ResultEntity;
+import com.citylife.common.model.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
 
 public class TemplateService {

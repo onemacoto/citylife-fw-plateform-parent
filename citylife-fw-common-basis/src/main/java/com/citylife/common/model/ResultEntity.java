@@ -1,14 +1,19 @@
-package com.citylife.function.core.boot.template.bean;
+package com.citylife.common.model;
 
 import java.io.Serializable;
 
-public class ResultEntity<T> implements FunctionResultCode, Serializable {
+import com.citylife.common.message.MessageModel;
+import com.citylife.common.message.Messages;
+
+public class ResultEntity<T> implements ResultCode, Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private String rtnCode = SUCCESS;
 
   private T value;
+  
+  private Messages messages = null;
 
   public ResultEntity(String rtnCode, T value) {
     this.rtnCode = rtnCode;
@@ -40,9 +45,24 @@ public class ResultEntity<T> implements FunctionResultCode, Serializable {
     this.value = value;
   }
 
+  public Messages getMessages() {
+    return messages;
+  }
+
+  public void setMessages(Messages messages) {
+    this.messages = messages;
+  }
+
   public static <R> ResultEntity<R> failure(String errorCode) {
     return new ResultEntity<>(errorCode);
   }
+
+  public static <R> ResultEntity<R> failure(String errorCode, MessageModel message) {
+    ResultEntity<R> entity = new ResultEntity<>(errorCode);
+    entity.messages = Messages.build(message);
+    return entity;
+  }
+
 
   public static <R> ResultEntity<R> ok() {
     return new ResultEntity<>(SUCCESS);

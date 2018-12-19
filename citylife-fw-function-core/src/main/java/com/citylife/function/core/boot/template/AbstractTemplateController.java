@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 
 import com.citylife.common.logging.AdminLogger;
+import com.citylife.common.model.ResultEntity;
 import com.citylife.common.utils.AnnotationUtils;
 import com.citylife.function.core.annotations.ActionTransactional;
-import com.citylife.function.core.boot.template.bean.ResultEntity;
 import com.citylife.function.core.log.IOperationLogger;
 
 public class AbstractTemplateController<S extends TemplateService> {

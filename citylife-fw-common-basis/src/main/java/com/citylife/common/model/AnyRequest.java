@@ -1,4 +1,4 @@
-package com.citylife.function.core.boot.template.bean;
+package com.citylife.common.model;
 
 import java.util.HashMap;
 

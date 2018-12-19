@@ -5,7 +5,7 @@ import org.springframework.util.ClassUtils;
 
 import com.citylife.common.component.BeanMapper;
 import com.citylife.common.exception.MethodNotSupportedException;
-import com.citylife.function.core.boot.template.bean.ResultEntity;
+import com.citylife.common.model.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContextFactory;

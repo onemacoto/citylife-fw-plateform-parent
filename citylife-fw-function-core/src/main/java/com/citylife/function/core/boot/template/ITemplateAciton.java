@@ -1,6 +1,6 @@
 package com.citylife.function.core.boot.template;
 
-import com.citylife.function.core.boot.template.bean.ResultEntity;
+import com.citylife.common.model.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
 
 public interface ITemplateAciton<P, R> extends IAction {
