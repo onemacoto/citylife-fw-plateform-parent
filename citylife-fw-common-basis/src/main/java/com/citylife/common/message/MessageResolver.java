@@ -9,58 +9,61 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 
 public class MessageResolver {
+  
+  public static final String DEFAULT_MESSAGE = "undefined message";
 
   @Autowired
   private MessageSource messageSource;
-
-  public MessageModel warn(String key,String defaultMessage) {
-    return MessageModel.warn(getMessage(key, defaultMessage));
+  
+  public MessageModel warn(String key) {
+    return MessageModel.warn(getMessage(key));
   }
   
-  public MessageModel warn(String key,Object[] args,String defaultMessage) {
-    return MessageModel.warn(getMessage(key, args, defaultMessage));
+  
+  public MessageModel warn(String key,Object[] args) {
+    return MessageModel.warn(getMessage(key, args));
   }
 
-  public MessageModel warn(String key,Object[] args,String defaultMessage, Locale locale) {
-    return MessageModel.warn(getMessage(key, args, defaultMessage, locale));
+  public MessageModel warn(String key,Object[] args, Locale locale) {
+    return MessageModel.warn(getMessage(key, args, locale));
   }
 
-  public MessageModel info(String key,String defaultMessage) {
-    return MessageModel.info(getMessage(key, defaultMessage));
+  public MessageModel info(String key) {
+    return MessageModel.info(getMessage(key));
   }
   
-  public MessageModel info(String key,Object[] args,String defaultMessage) {
-    return MessageModel.warn(getMessage(key, args, defaultMessage));
+  public MessageModel info(String key,Object[] args) {
+    return MessageModel.warn(getMessage(key, args));
   }
 
-  public MessageModel info(String key,Object[] args,String defaultMessage, Locale locale) {
-    return MessageModel.warn(getMessage(key, args, defaultMessage, locale));
+  public MessageModel info(String key,Object[] args, Locale locale) {
+    return MessageModel.warn(getMessage(key, args, locale));
   }
   
-  public MessageModel error(String key,String defaultMessage) {
-    return MessageModel.error(getMessage(key, defaultMessage));
+  public MessageModel error(String key) {
+    return MessageModel.error(getMessage(key));
   }
   
-  public MessageModel error(String key,Object[] args,String defaultMessage) {
-    return MessageModel.error(getMessage(key, args, defaultMessage));
+  public MessageModel error(String key,Object[] args) {
+    return MessageModel.error(getMessage(key, args));
   }
 
-  public MessageModel error(String key,Object[] args,String defaultMessage, Locale locale) {
-    return MessageModel.error(getMessage(key, args, defaultMessage, locale));
+  public MessageModel error(String key,Object[] args, Locale locale) {
+    return MessageModel.error(getMessage(key, args, locale));
   }
 
-  public String getMessage(String key,String defaultMessage) {
-      return getMessage(key,null, defaultMessage);
+  public String getMessage(String key) {
+      return getMessage(key,null);
   }
   
-  public String getMessage(String key,Object[] args,String defaultMessage) {
-      return getMessage(key,args,defaultMessage, null);
+  public String getMessage(String key,Object[] args) {
+      return getMessage(key,args,null);
   }
 
-  public String getMessage(String key,Object[] args,String defaultMessage,Locale locale) {
-
+  public String getMessage(String key,Object[] args,Locale locale) {
+    
     if (isEmpty(key)) {
-      return defaultMessage;
+      return DEFAULT_MESSAGE;
     }
 
     if (locale == null) {
@@ -70,7 +73,7 @@ public class MessageResolver {
       }
     }
 
-    return this.messageSource.getMessage(trimToEmpty(key), args, trimToEmpty(defaultMessage), locale);
+    return this.messageSource.getMessage(trimToEmpty(key), args, DEFAULT_MESSAGE, locale);
   }
 
 }

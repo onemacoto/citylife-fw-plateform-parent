@@ -3,13 +3,18 @@ package com.citylife.function.core.boot.template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StopWatch;
 
+import com.citylife.common.constants.SystemMessageConsts;
 import com.citylife.common.logging.AdminLogger;
+import com.citylife.common.message.MessageResolver;
 import com.citylife.common.model.ResultEntity;
 import com.citylife.common.utils.AnnotationUtils;
 import com.citylife.function.core.annotations.ActionTransactional;
 import com.citylife.function.core.log.IOperationLogger;
 
 public class AbstractTemplateController<S extends TemplateService> {
+  
+    @Autowired
+    private MessageResolver messageResolver;
 
 	private S service;
 
@@ -41,7 +46,7 @@ public class AbstractTemplateController<S extends TemplateService> {
 		} catch (Throwable t) {
 			AdminLogger.error(String.format("exception happen when call action [%s]",
 					(action == null) ? "undefined action" : action.getActionName()), t);
-			return ResultEntity.failure(ResultEntity.SYSTEM_ERROR);
+			return ResultEntity.failure(ResultEntity.SYSTEM_ERROR, messageResolver.error(SystemMessageConsts.SYSTEM_ERROR_UNEXPECTED));
 		} finally {
 			sw.stop();
 			if (operationLogger != null) {

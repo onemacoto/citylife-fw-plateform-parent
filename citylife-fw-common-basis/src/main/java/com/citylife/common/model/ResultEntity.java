@@ -10,6 +10,9 @@ public class ResultEntity<T> implements ResultCode, Serializable {
   private static final long serialVersionUID = 1L;
 
   private String rtnCode = SUCCESS;
+  
+  private String traceId;
+
 
   private T value;
   
@@ -51,6 +54,14 @@ public class ResultEntity<T> implements ResultCode, Serializable {
 
   public void setMessages(Messages messages) {
     this.messages = messages;
+  }
+
+  public String getTraceId() {
+    return traceId;
+  }
+
+  public void setTraceId(String traceId) {
+    this.traceId = traceId;
   }
 
   public static <R> ResultEntity<R> failure(String errorCode) {

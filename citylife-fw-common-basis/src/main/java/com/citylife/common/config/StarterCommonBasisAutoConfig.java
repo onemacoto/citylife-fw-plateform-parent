@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.citylife.common.component.BeanMapper;
 import com.citylife.common.component.JWTHelper;
+import com.citylife.common.component.TraceHelper;
 import com.citylife.common.message.MessageResolver;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
@@ -39,5 +40,12 @@ public class StarterCommonBasisAutoConfig {
 	  MessageResolver bean = new MessageResolver();
 	  return bean;
 	}
+
+    @Bean
+    @ConditionalOnMissingBean
+    public TraceHelper traceHelper() {
+      TraceHelper bean = new TraceHelper();
+      return bean;
+    }
 
 }
