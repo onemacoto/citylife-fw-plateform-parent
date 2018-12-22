@@ -73,6 +73,12 @@ public class ResultEntity<T> implements ResultCode, Serializable {
     entity.messages = Messages.build(message);
     return entity;
   }
+  
+  public static <R> ResultEntity<R> failure(String errorCode, Messages messages) {
+    ResultEntity<R> entity = new ResultEntity<>(errorCode);
+    entity.messages = messages;
+    return entity;
+  }
 
 
   public static <R> ResultEntity<R> ok() {
