@@ -9,4 +9,6 @@ public interface IActionContext<T> {
   void setUser(IUser uvo);
   String getToken();
   void setToken(String token);
+  String getVersion();
+  void setVersion(String version);
 }

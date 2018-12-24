@@ -13,9 +13,10 @@ public class TemplateActionContextFactory<T> {
 	@Autowired
 	private JWTHelper jwtHelper;
 
-	public <R extends IActionContext<T>> R createInstance(T parameter, String token, Class<R> cls) {
+	public <R extends IActionContext<T>> R createInstance(String version, T parameter, String token, Class<R> cls) {
 		try {
 			R instance = cls.newInstance();
+			instance.setVersion(version);
 			instance.setParameter(parameter);
 			IUser uvo = StringUtils.hasText(token) ? jwtHelper.parseToken(token, UserValueObject.class)
 					: UserValueObject.empty();

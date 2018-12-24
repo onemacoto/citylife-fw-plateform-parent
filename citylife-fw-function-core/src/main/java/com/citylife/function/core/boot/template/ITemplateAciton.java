@@ -5,7 +5,7 @@ import com.citylife.function.core.boot.template.context.IActionContext;
 
 public interface ITemplateAciton<P, R> extends IAction {
 
-  IActionContext<P> createContext(P parameter, String token);
+  IActionContext<P> createContext(String version, P parameter, String token);
 
   default ResultEntity<R> validate(IActionContext<P> context) {
     return ResultEntity.ok();

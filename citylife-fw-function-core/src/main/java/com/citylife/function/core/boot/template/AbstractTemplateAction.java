@@ -33,8 +33,8 @@ public abstract class AbstractTemplateAction<P, R> implements ITemplateAciton<P,
 	}
 
 	@Override
-	public IActionContext<P> createContext(final P parameter, final String token) {
-		return getActionContextFactory().createInstance(parameter, token, getContextClass());
+	public IActionContext<P> createContext(final String version, final P parameter, final String token) {
+		return getActionContextFactory().createInstance(version, parameter, token, getContextClass());
 	}
 
 	@Override
