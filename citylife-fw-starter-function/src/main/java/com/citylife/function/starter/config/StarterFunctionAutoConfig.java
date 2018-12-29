@@ -1,6 +1,5 @@
 package com.citylife.function.starter.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,8 +23,8 @@ import ch.qos.logback.classic.helpers.MDCInsertingServletFilter;
 @Import({FunctionWebMvcConfig.class, FunctionFeignConfig.class, FunctionResolverAdapterConfig.class, TemplateConfig.class})
 public class StarterFunctionAutoConfig {
 
-  @Autowired
-  private FunctionProperties functionProperties;
+//  @Autowired
+//  private FunctionProperties functionProperties;
 
   @Bean
   @ConditionalOnMissingBean

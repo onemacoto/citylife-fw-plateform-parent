@@ -5,12 +5,14 @@ import org.springframework.util.ClassUtils;
 
 import com.citylife.common.component.BeanMapper;
 import com.citylife.common.exception.MethodNotSupportedException;
+import com.citylife.common.model.RequestVO;
+import com.citylife.common.model.ResponseVO;
 import com.citylife.common.model.ResultEntity;
 import com.citylife.function.core.boot.template.context.IActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContext;
 import com.citylife.function.core.boot.template.context.TemplateActionContextFactory;
 
-public abstract class AbstractTemplateAction<P, R> implements ITemplateAciton<P, R> {
+public abstract class AbstractTemplateAction<P  extends RequestVO<?>, R  extends ResponseVO<?>> implements ITemplateAciton<P, R> {
 
 	@Autowired
 	private BeanMapper beanMapper;

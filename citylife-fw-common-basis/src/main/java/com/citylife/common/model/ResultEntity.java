@@ -14,13 +14,13 @@ public class ResultEntity<T> implements ResultCode, Serializable {
   private String traceId;
 
 
-  private T value;
+  private T body;
   
   private Messages messages = null;
 
-  public ResultEntity(String rtnCode, T value) {
+  public ResultEntity(String rtnCode, T body) {
     this.rtnCode = rtnCode;
-    this.value = value;
+    this.body = body;
   }
   
   public ResultEntity(String rtnCode) {
@@ -40,12 +40,12 @@ public class ResultEntity<T> implements ResultCode, Serializable {
     this.rtnCode = rtnCode;
   }
 
-  public T getValue() {
-    return value;
+  public T getBody() {
+    return body;
   }
 
-  public void setValue(T value) {
-    this.value = value;
+  public void setBody(T body) {
+    this.body = body;
   }
 
   public Messages getMessages() {
@@ -87,7 +87,7 @@ public class ResultEntity<T> implements ResultCode, Serializable {
   
   public static <R> ResultEntity<R> ok(R value) {
     ResultEntity<R> response =new ResultEntity<>(SUCCESS);
-    response.setValue(value);
+    response.setBody(value);
     return response;
   }
   

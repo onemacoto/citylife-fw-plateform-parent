@@ -6,6 +6,8 @@ import org.springframework.util.StopWatch;
 import com.citylife.common.constants.SystemMessageConsts;
 import com.citylife.common.logging.AdminLogger;
 import com.citylife.common.message.MessageResolver;
+import com.citylife.common.model.RequestVO;
+import com.citylife.common.model.ResponseVO;
 import com.citylife.common.model.ResultEntity;
 import com.citylife.common.utils.AnnotationUtils;
 import com.citylife.function.core.annotations.ActionTransactional;
@@ -27,7 +29,7 @@ public class AbstractTemplateController<S extends TemplateService> {
   @Autowired(required = false)
   IOperationLogger operationLogger;
 
-  protected <P, R> ResultEntity<R> doAction(final String version, final ITemplateAciton<P, R> action, final P parameter, final String token) {
+  protected <P extends RequestVO<?>, R extends ResponseVO<?>> ResultEntity<R> doAction(final ITemplateAciton<P, R> action, final P parameter, final String version, final String token) {
 
     if (operationLogger != null) {
       operationLogger.logOperationBegin(action);
@@ -38,9 +40,9 @@ public class AbstractTemplateController<S extends TemplateService> {
       sw.start();
       ResultEntity<R> result = null;
       if (AnnotationUtils.isAnnotated(action, ActionTransactional.class)) {
-        result = service.excute(version, action, parameter, token);
+        result = service.excute(action, parameter, version, token);
       } else {
-        result = service.excuteWithoutTransaction(version, action, parameter, token);
+        result = service.excuteWithoutTransaction(action, parameter, version, token);
       }
       return result;
     } catch (Throwable t) {
@@ -57,7 +59,5 @@ public class AbstractTemplateController<S extends TemplateService> {
         operationLogger.logOperationEnd(action, sw.getTotalTimeMillis());
       }
     }
-
   }
-
 }
