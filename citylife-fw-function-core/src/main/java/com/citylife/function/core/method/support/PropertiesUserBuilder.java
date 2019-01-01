@@ -6,7 +6,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.citylife.common.model.IUser;
+import com.citylife.common.model.IHeaderUser;
 import com.citylife.common.model.UserValueObject;
 import com.citylife.function.core.properties.FunctionProperties;
 
@@ -19,10 +19,10 @@ public class PropertiesUserBuilder implements IUserBuilder {
   }
 
   @Override
-  public IUser build(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
+  public IHeaderUser build(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
       WebDataBinderFactory binderFactory) {
     UserValueObject user = new UserValueObject();
-    user.setUserId(properties.getMockUser().getUserId());
+    user.setUserId(Long.parseLong(properties.getMockUser().getUserId()));
     return user;
   }
 

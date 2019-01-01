@@ -1,11 +1,11 @@
 package com.citylife.function.core.boot.template.context;
 
-import com.citylife.common.model.IUser;
+import com.citylife.common.model.IHeaderUser;
 
 public class TemplateActionContext<T> implements IActionContext<T> {
 
   private T parameter;
-  private IUser uvo;
+  private IHeaderUser uvo;
   private String token;
   private String version;
 
@@ -18,12 +18,12 @@ public class TemplateActionContext<T> implements IActionContext<T> {
   }
 
   @Override
-  public IUser getUser() {
+  public IHeaderUser getUser() {
     return this.uvo;
   }
 
   @Override
-  public void setUser(IUser uvo) {
+  public void setUser(IHeaderUser uvo) {
     this.uvo = uvo;
   }
 

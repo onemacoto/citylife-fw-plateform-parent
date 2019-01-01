@@ -9,7 +9,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.citylife.common.model.IUser;
+import com.citylife.common.model.IHeaderUser;
+import com.citylife.common.model.UserValueObject;
 
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -26,15 +27,21 @@ public class JWTHelper {
 	public void init() {
 		secretKey = serializeKey("secret");
 	}
+	
+	public String createAdminToken() {
+		IHeaderUser user = UserValueObject.empty();
+		user.setUserId(0L);
+		return createToken(user);
+	}
 
-	public String createToken(IUser user) {
+	public String createToken(IHeaderUser user) {
 		Map<String, Object> claims = mapper.asMap(user);
 		JwtBuilder builder = Jwts.builder().setHeaderParam("alg", "HS512").setHeaderParam("typ", "JWT")
 				.addClaims(claims).signWith(SignatureAlgorithm.HS512, secretKey);
 		return builder.compact();
 	}
 
-	public <T extends IUser> IUser parseToken(String token, Class<T> clazz) {
+	public <T extends IHeaderUser> IHeaderUser parseToken(String token, Class<T> clazz) {
 
 		Map<String, Object> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
 		return mapper.asBean(claims, clazz);

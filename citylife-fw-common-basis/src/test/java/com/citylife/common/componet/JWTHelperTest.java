@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.citylife.common.component.JWTHelper;
 import com.citylife.common.config.StarterCommonBasisAutoConfig;
-import com.citylife.common.model.IUser;
+import com.citylife.common.model.IHeaderUser;
 import com.citylife.common.model.UserValueObject;
 
 @RunWith(SpringRunner.class)
@@ -22,8 +22,8 @@ public class JWTHelperTest {
 
 	@Test
 	public void testCreateToken01() {
-		IUser user = new UserValueObject();
-		user.setUserId("testId");
+		IHeaderUser user = new UserValueObject();
+		user.setUserId(1L);
 		System.out.println(jwtHelper.createToken(user));
 		Assert.assertNotNull(jwtHelper.createToken(user));
 	}
@@ -35,10 +35,10 @@ public class JWTHelperTest {
 
 	@Test
 	public void testParseToken() {
-		IUser user = new UserValueObject();
-		user.setUserId("testId");
-		IUser claims = jwtHelper.parseToken(jwtHelper.createToken(user), UserValueObject.class);
-		Assert.assertThat(claims.getUserId(), CoreMatchers.is("testId"));
+		IHeaderUser user = new UserValueObject();
+		user.setUserId(1L);
+		IHeaderUser claims = jwtHelper.parseToken(jwtHelper.createToken(user), UserValueObject.class);
+		Assert.assertThat(claims.getUserId(), CoreMatchers.is(1L));
 	}
 
 }

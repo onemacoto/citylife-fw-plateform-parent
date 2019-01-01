@@ -2,23 +2,23 @@ package com.citylife.common.model;
 
 import java.io.Serializable;
 
-public class UserValueObject implements IUser, Serializable {
+public class UserValueObject implements IHeaderUser, Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private String userId;
+  private Long userId;
 
   @Override
-  public String getUserId() {
+  public Long getUserId() {
     return userId;
   }
 
   @Override
-  public void setUserId(String userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
   
-  public static IUser empty() {
+  public static IHeaderUser empty() {
     return new UserValueObject();
   }
 }
