@@ -14,38 +14,38 @@ import com.github.dozermapper.core.Mapper;
 @Configuration
 public class StarterCommonBasisAutoConfig {
 
-	@Bean
-	@ConditionalOnMissingBean
-	public Mapper mapper() {
-		return DozerBeanMapperBuilder.buildDefault();
-	}
+  @Bean
+  @ConditionalOnMissingBean
+  public Mapper mapper() {
+    return DozerBeanMapperBuilder.buildDefault();
+  }
 
-	@Bean
-	@ConditionalOnMissingBean
-	public BeanMapper beanMapper() {
-		BeanMapper bean = new BeanMapper();
-		return bean;
-	}
+  @Bean
+  @ConditionalOnMissingBean
+  public BeanMapper beanMapper() {
+    BeanMapper bean = new BeanMapper();
+    return bean;
+  }
 
-	@Bean
-	@ConditionalOnMissingBean
-	public JWTHelper jwtHelper() {
-		JWTHelper bean = new JWTHelper();
-		return bean;
-	}
-	
-    @Bean
-    @ConditionalOnMissingBean	
-	public MessageResolver messageResolver() {
-	  MessageResolver bean = new MessageResolver();
-	  return bean;
-	}
+  @Bean
+  @ConditionalOnMissingBean
+  public JWTHelper jwtHelper() {
+    JWTHelper bean = new JWTHelper();
+    return bean;
+  }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public TraceHelper traceHelper() {
-      TraceHelper bean = new TraceHelper();
-      return bean;
-    }
+  @Bean
+  @ConditionalOnMissingBean
+  public MessageResolver messageResolver() {
+    MessageResolver bean = new MessageResolver();
+    return bean;
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public TraceHelper traceHelper() {
+    TraceHelper bean = new TraceHelper();
+    return bean;
+  }
 
 }

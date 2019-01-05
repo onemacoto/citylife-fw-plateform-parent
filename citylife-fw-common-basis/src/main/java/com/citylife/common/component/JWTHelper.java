@@ -18,38 +18,37 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JWTHelper {
 
-	private Key secretKey;
+  private Key secretKey;
 
-	@Autowired
-	private BeanMapper mapper;
+  @Autowired
+  private BeanMapper mapper;
 
-	@PostConstruct
-	public void init() {
-		secretKey = serializeKey("secret");
-	}
-	
-	public String createAdminToken() {
-		IHeaderUser user = UserValueObject.empty();
-		user.setUserId(0L);
-		return createToken(user);
-	}
+  @PostConstruct
+  public void init() {
+    secretKey = serializeKey("secret");
+  }
 
-	public String createToken(IHeaderUser user) {
-		Map<String, Object> claims = mapper.asMap(user);
-		JwtBuilder builder = Jwts.builder().setHeaderParam("alg", "HS512").setHeaderParam("typ", "JWT")
-				.addClaims(claims).signWith(SignatureAlgorithm.HS512, secretKey);
-		return builder.compact();
-	}
+  public String createAdminToken() {
+    IHeaderUser user = UserValueObject.empty();
+    user.setUserId(0L);
+    return createToken(user);
+  }
 
-	public <T extends IHeaderUser> IHeaderUser parseToken(String token, Class<T> clazz) {
+  public String createToken(IHeaderUser user) {
+    Map<String, Object> claims = mapper.asMap(user);
+    JwtBuilder builder = Jwts.builder().setHeaderParam("alg", "HS512").setHeaderParam("typ", "JWT").addClaims(claims).signWith(SignatureAlgorithm.HS512, secretKey);
+    return builder.compact();
+  }
 
-		Map<String, Object> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-		return mapper.asBean(claims, clazz);
-	}
+  public <T extends IHeaderUser> IHeaderUser parseToken(String token, Class<T> clazz) {
 
-	private Key serializeKey(String encodedKey) {
-		byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
-		Key key = new SecretKeySpec(decodedKey, SignatureAlgorithm.HS512.getJcaName());
-		return key;
-	}
+    Map<String, Object> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+    return mapper.asBean(claims, clazz);
+  }
+
+  private Key serializeKey(String encodedKey) {
+    byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
+    Key key = new SecretKeySpec(decodedKey, SignatureAlgorithm.HS512.getJcaName());
+    return key;
+  }
 }
