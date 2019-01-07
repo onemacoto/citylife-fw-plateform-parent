@@ -8,4 +8,14 @@ public class RequestVOBuilder {
     return new RequestVO<>(parameter);
   }
 
+  public static <T> RequestVO<T> build(T parameter, RequestVO<?> baseVO) {
+    RequestVO<T> vo = new RequestVO<>(parameter);
+
+    if (baseVO != null) {
+      vo.setCommon(baseVO.getCommon());
+    }
+
+    return vo;
+  }
+
 }
