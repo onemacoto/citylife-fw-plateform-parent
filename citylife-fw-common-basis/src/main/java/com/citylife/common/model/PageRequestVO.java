@@ -10,6 +10,10 @@ public class PageRequestVO<T> extends RequestVO<T> {
   public PageRequestVO(T data) {
     super(data);
   }
+  
+  public PageRequestVO(T data, PageInfo page) {
+    super(data);
+  }
 
   public PageInfo getPage() {
     return page;
